@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.managementsystem.EmployeePaymentsController"
+            style="-fx-padding: 15;" prefWidth="800" prefHeight="600">
+
+
+    <Pane layoutX="15" layoutY="15" prefWidth="770" prefHeight="40">
+        <Label text="Search:" layoutX="0" layoutY="5" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="searchField" layoutX="60" layoutY="0" prefWidth="300"
+                   promptText="Search by customer, method or status"/>
+        <Button text="Search" layoutX="370" layoutY="0" onAction="#handleSearch"/>
+        <Button text="View All" layoutX="450" layoutY="0" onAction="#handleViewHistory"/>
+    </Pane>
+
+
+    <TableView fx:id="paymentTable" layoutX="15" layoutY="70" prefWidth="770" prefHeight="300">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="bookingIdColumn" text="Booking ID" prefWidth="80"/>
+            <TableColumn fx:id="customerColumn" text="Customer" prefWidth="150"/>
+            <TableColumn fx:id="amountColumn" text="Amount" prefWidth="80"/>
+            <TableColumn fx:id="dateColumn" text="Date" prefWidth="120"/>
+            <TableColumn fx:id="methodColumn" text="Method" prefWidth="100"/>
+            <TableColumn fx:id="statusColumn" text="Status" prefWidth="80"/>
+        </columns>
+    </TableView>
+
+
+    <Pane layoutX="15" layoutY="380" prefWidth="770" prefHeight="40">
+        <Button text="Process Payment" layoutX="0" layoutY="0"
+                style="-fx-base: #27ae60; -fx-text-fill: white;"
+                onAction="#handleProcessPayment"/>
+    </Pane>
+
+
+    <Pane fx:id="paymentForm" layoutX="15" layoutY="430" prefWidth="770" prefHeight="200"
+          style="-fx-padding: 15; -fx-border-color: #bdc3c7; -fx-border-width: 1; -fx-border-radius: 5;"
+          visible="false">
+
+
+        <Label text="Payment Details" layoutX="0" layoutY="0"
+               style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+
+
+        <Label text="Booking ID:" layoutX="0" layoutY="30"/>
+        <Label fx:id="bookingIdLabel" layoutX="150" layoutY="30"/>
+
+        <Label text="Customer:" layoutX="0" layoutY="60"/>
+        <Label fx:id="customerNameLabel" layoutX="150" layoutY="60"/>
+
+        <Label text="Amount Due:" layoutX="0" layoutY="90"/>
+        <Label fx:id="amountDueLabel" layoutX="150" layoutY="90"/>
+
+        <Label text="Payment Method:" layoutX="0" layoutY="120"/>
+        <ComboBox fx:id="paymentMethodCombo" layoutX="150" layoutY="115" prefWidth="150"/>
+
+        <Label text="Amount Paid:" layoutX="0" layoutY="150"/>
+        <TextField fx:id="amountPaidField" layoutX="150" layoutY="145" prefWidth="150"/>
+
+
+        <Button text="Confirm" layoutX="150" layoutY="180"
+                style="-fx-base: #27ae60; -fx-text-fill: white;"
+                onAction="#handleConfirmPayment"/>
+        <Button text="Cancel" layoutX="230" layoutY="180"
+                style="-fx-base: #e74c3c; -fx-text-fill: white;"
+                onAction="#handleCancelPayment"/>
+    </Pane>
+
+</AnchorPane>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="490.0" prefWidth="748.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managementsystem.LoginController">
+
+    <Pane layoutX="0" layoutY="0" prefHeight="60" prefWidth="748.0" style="-fx-background-color: #2c3e50;">
+        <Label layoutX="232.0" layoutY="13.0" style="-fx-text-fill: white; -fx-font-size: 24; -fx-font-weight: bold;" text="Login to Your Account" />
+    </Pane>
+
+
+    <Pane layoutX="100" layoutY="80" prefHeight="250" prefWidth="400">
+
+        <Label layoutX="0" layoutY="0" text="Email or Username:" />
+        <TextField fx:id="usernameField" layoutX="100" layoutY="0" prefWidth="200" promptText="Enter email or username" />
+
+        <Label layoutX="0" layoutY="50" text="Password:" />
+        <PasswordField fx:id="passwordField" layoutX="100" layoutY="50" prefWidth="200" promptText="Enter password" />
+
+        <Label layoutX="0" layoutY="100" text="Role:" />
+        <ComboBox fx:id="roleComboBox" layoutX="100" layoutY="100" prefWidth="200" />
+
+        <Button layoutX="100" layoutY="150" onAction="#handleLogin" prefWidth="200"
+                style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;"
+                text="Login" />
+    </Pane>
+
+
+    <Pane layoutX="180" layoutY="330">
+        <Label layoutX="0" layoutY="0" text="Don't have an account?" />
+        <Button layoutX="160" layoutY="-5" onAction="#goToRegister"
+                style="-fx-background-color: transparent; -fx-text-fill: #3498db;"
+                text="Register here" />
+    </Pane>
+
+</AnchorPane>

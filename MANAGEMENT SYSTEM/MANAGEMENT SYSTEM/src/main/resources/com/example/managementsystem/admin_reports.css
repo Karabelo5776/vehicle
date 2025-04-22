@@ -1,0 +1,80 @@
+
+.main-pane {
+    -fx-background-color: #f4f6f9;
+    -fx-padding: 20;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+
+.title-label {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.back-button,
+.report-button,
+.export-button {
+    -fx-background-radius: 8;
+    -fx-padding: 10 18;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-text-fill: white;
+}
+
+.back-button {
+    -fx-background-color: #7f8c8d;
+}
+
+.revenue-button {
+    -fx-background-color: #27ae60;
+}
+
+.utilization-button {
+    -fx-background-color: #2980b9;
+}
+
+.activity-button {
+    -fx-background-color: #8e44ad;
+}
+
+.export-button {
+    -fx-background-color: #e67e22;
+}
+
+
+.report-toolbar {
+    -fx-alignment: center-left;
+}
+
+
+.chart-container {
+    -fx-background-color: white;
+    -fx-border-color: #dcdde1;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-padding: 25;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 12, 0, 0, 2);
+}
+
+
+.revenue-chart {
+    -fx-bar-fill: #2ecc71;
+    -fx-title-side: top;
+    -fx-legend-visible: false;
+}
+
+
+.activity-chart {
+    -fx-stroke: #9b59b6;
+    -fx-title-side: top;
+    -fx-legend-visible: false;
+}
+
+
+.utilization-chart {
+    -fx-pie-label-visible: true;
+    -fx-start-angle: 90;
+    -fx-label-line-length: 15;
+}

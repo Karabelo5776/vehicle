@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane stylesheets="@admin_users.css" prefHeight="600" prefWidth="800" styleClass="main-pane"
+            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.managementsystem.AdminUsersController">
+
+    <Button fx:id="backButton" layoutX="284.0" layoutY="23.0" onAction="#handleBackButton"
+            styleClass="back-button" text="Back to Dashboard" />
+
+
+    <Label fx:id="titleLabel" layoutX="20" layoutY="20" styleClass="title-label"
+           text="User Management" />
+
+
+    <Pane fx:id="buttonPanel" layoutX="20" layoutY="60" prefHeight="40" prefWidth="760"
+          styleClass="button-pane">
+        <Button fx:id="addButton" layoutX="0" layoutY="0" onAction="#handleAddUser"
+                styleClass="action-button add-button" text="Add User" />
+        <Button fx:id="editButton" layoutX="90" layoutY="0" onAction="#handleEditUser"
+                styleClass="action-button edit-button" text="Edit User" />
+        <Button fx:id="deleteButton" layoutX="180" layoutY="0" onAction="#handleDeleteUser"
+                styleClass="action-button delete-button" text="Delete User" />
+        <TextField fx:id="searchField" layoutX="300" layoutY="0" prefWidth="200"
+                   promptText="Search users..." styleClass="search-field" />
+        <Button fx:id="searchButton" layoutX="510" layoutY="0" onAction="#handleSearch"
+                styleClass="search-button" text="Search" />
+    </Pane>
+
+
+    <TableView fx:id="userTable" layoutX="20" layoutY="120" prefHeight="450" prefWidth="760"
+               styleClass="table-view">
+        <columns>
+            <TableColumn fx:id="idColumn" styleClass="id-column" prefWidth="56.0" text="ID" />
+            <TableColumn fx:id="usernameColumn" styleClass="username-column" prefWidth="114.0"
+                         text="Username" />
+            <TableColumn fx:id="nameColumn" styleClass="name-column" prefWidth="150"
+                         text="Full Name" />
+            <TableColumn fx:id="emailColumn" styleClass="email-column" prefWidth="157.0"
+                         text="Email" />
+            <TableColumn fx:id="roleColumn" styleClass="role-column" prefWidth="110.0"
+                         text="Role" />
+            <TableColumn fx:id="createdColumn" styleClass="created-column" prefWidth="171.0"
+                         text="Created" />
+        </columns>
+    </TableView>
+</AnchorPane>

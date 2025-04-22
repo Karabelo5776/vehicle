@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<GridPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="com.example.managementsystem.VehicleDialogController"
+          hgap="10" vgap="10" style="-fx-padding: 20;">
+
+    <Label text="Brand:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <TextField fx:id="brandField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+    <Label text="Model:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <TextField fx:id="modelField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+    <Label text="Category:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <ComboBox fx:id="categoryCombo" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+    <Label text="Year:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <TextField fx:id="yearField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+    <Label text="Price/Day:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <TextField fx:id="priceField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+    <Label text="Status:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+    <ComboBox fx:id="statusCombo" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT" GridPane.rowIndex="6" GridPane.columnIndex="1">
+        <Button text="Cancel" onAction="#handleCancel"/>
+        <Button text="Save" style="-fx-background-color: #2ecc71; -fx-text-fill: white;" onAction="#handleSave"/>
+    </HBox>
+</GridPane>

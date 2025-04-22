@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<GridPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="com.example.managementsystem.ModifyBookingController"
+          hgap="10" vgap="10" style="-fx-padding: 20;">
+
+    <Label text="Modify Booking" style="-fx-font-size: 18; -fx-font-weight: bold;"
+           GridPane.columnSpan="2" GridPane.halignment="CENTER"/>
+
+    <Label text="Customer:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <Label fx:id="customerLabel" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+    <Label text="Vehicle:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <Label fx:id="vehicleLabel" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+    <Label text="Current Start Date:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <Label fx:id="currentStartDateLabel" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+    <Label text="Current End Date:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <Label fx:id="currentEndDateLabel" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+    <Label text="New End Date:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+    <DatePicker fx:id="newEndDatePicker" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+    <Label text="Additional Charges:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+    <TextField fx:id="additionalChargesField" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT" GridPane.rowIndex="7" GridPane.columnSpan="2">
+        <Button text="Cancel" onAction="#handleCancel"/>
+        <Button text="Save Changes" style="-fx-background-color: #2ecc71; -fx-text-fill: white;" onAction="#handleSave"/>
+    </HBox>
+</GridPane>

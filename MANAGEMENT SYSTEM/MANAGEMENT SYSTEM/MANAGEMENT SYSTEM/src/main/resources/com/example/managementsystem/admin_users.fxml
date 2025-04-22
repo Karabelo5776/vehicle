@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.managementsystem.AdminUsersController"
+            prefWidth="800" prefHeight="600" style="-fx-padding: 20;">
+
+
+    <Label text="User Management" layoutX="20" layoutY="20"
+           style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+
+
+    <Pane layoutX="20" layoutY="60" prefWidth="760" prefHeight="40">
+        <Button text="Add User" layoutX="0" layoutY="0"
+                style="-fx-background-color: #2ecc71; -fx-text-fill: white;"
+                onAction="#handleAddUser"/>
+        <Button text="Edit User" layoutX="90" layoutY="0"
+                style="-fx-background-color: #3498db; -fx-text-fill: white;"
+                onAction="#handleEditUser"/>
+        <Button text="Delete User" layoutX="180" layoutY="0"
+                style="-fx-background-color: #e74c3c; -fx-text-fill: white;"
+                onAction="#handleDeleteUser"/>
+        <TextField fx:id="searchField" layoutX="300" layoutY="0" prefWidth="200"
+                   promptText="Search users..."/>
+        <Button text="Search" layoutX="510" layoutY="0" onAction="#handleSearch"/>
+    </Pane>
+
+
+    <TableView fx:id="userTable" layoutX="20" layoutY="120" prefWidth="760" prefHeight="450">
+        <columns>
+            <TableColumn text="ID" fx:id="idColumn" prefWidth="50"/>
+            <TableColumn text="Username" fx:id="usernameColumn" prefWidth="120"/>
+            <TableColumn text="Full Name" fx:id="nameColumn" prefWidth="150"/>
+            <TableColumn text="Email" fx:id="emailColumn" prefWidth="150"/>
+            <TableColumn text="Role" fx:id="roleColumn" prefWidth="80"/>
+            <TableColumn text="Created" fx:id="createdColumn" prefWidth="120"/>
+        </columns>
+    </TableView>
+
+</AnchorPane>

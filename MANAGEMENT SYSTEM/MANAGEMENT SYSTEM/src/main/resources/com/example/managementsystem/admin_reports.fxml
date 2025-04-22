@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+
+<?import javafx.scene.layout.VBox?>
+<AnchorPane stylesheets="@admin_reports.css" prefHeight="700" prefWidth="1000" styleClass="main-pane"
+            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.managementsystem.AdminReportsController">
+
+    <VBox spacing="20" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+
+        <HBox spacing="20" alignment="CENTER_LEFT">
+            <Label styleClass="title-label" text="Reports Dashboard" />
+            <Button onAction="#handleBackButton" styleClass="back-button" text="Back to Dashboard" />
+        </HBox>
+
+        <HBox spacing="15" styleClass="report-toolbar">
+            <Button onAction="#showRevenueReport" styleClass="report-button revenue-button" text="Revenue Report" />
+            <Button onAction="#showUtilizationReport" styleClass="report-button utilization-button" text="Vehicle Utilization" />
+            <Button onAction="#showActivityReport" styleClass="report-button activity-button" text="Customer Activity" />
+            <Button onAction="#handleExportPDF" styleClass="export-button" text="Export to PDF" />
+        </HBox>
+
+        <!-- Chart Container -->
+        <StackPane fx:id="chartPane" styleClass="chart-container">
+            <BarChart fx:id="revenueChart" styleClass="chart revenue-chart" title="Monthly Revenue" visible="false">
+                <xAxis>
+                    <CategoryAxis label="Month" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Amount ($)" />
+                </yAxis>
+            </BarChart>
+
+            <PieChart fx:id="utilizationChart" styleClass="chart utilization-chart" title="Vehicle Utilization" visible="false" />
+
+            <LineChart fx:id="activityChart" styleClass="chart activity-chart" title="Customer Activity" visible="false">
+                <xAxis>
+                    <CategoryAxis label="Month" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Rentals" />
+                </yAxis>
+            </LineChart>
+        </StackPane>
+    </VBox>
+</AnchorPane>

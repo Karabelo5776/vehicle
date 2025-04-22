@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="543.0" prefWidth="691.0" style="-fx-background-color: #ecf0f1;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managementsystem.HomeController">
+
+    <Label layoutX="118.0" layoutY="14.0" prefHeight="65.0" prefWidth="440.0" style="-fx-text-fill: white; -fx-font-size: 24; -fx-font-weight: bold; -fx-background-color: #2c3e50; -fx-padding: 15;" text="Vehicle Rental System" />
+
+    <ImageView layoutX="215.0" layoutY="106.0">
+        <Image url="@../images/car-rental.png" />
+    </ImageView>
+
+    <Text layoutX="159.0" layoutY="340.0" style="-fx-font-size: 28; -fx-fill: #2c3e50;" text="Welcome to Vehicle Rental System!" />
+    <Text layoutX="159.0" layoutY="380.0" style="-fx-font-size: 16; -fx-fill: #7f8c8d;" text="Rent your preferred vehicle with just a few clicks!" />
+
+    <Button layoutX="209.0" layoutY="430.0" onAction="#goToLogin" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;" text="Login" />
+    <Button layoutX="329.0" layoutY="430.0" onAction="#goToRegister" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold;" text="Register" />
+
+    <Label layoutX="206.0" layoutY="475.0" style="-fx-text-fill: #7f8c8d;" text="© 2023 Vehicle Rental System. All rights reserved." />
+</AnchorPane>

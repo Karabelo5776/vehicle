@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600" prefWidth="896.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managementsystem.EmployeeDashboardController">
+
+
+    <Pane layoutX="0" layoutY="0" prefHeight="60" prefWidth="896.0" style="-fx-background-color: #2c3e50;">
+        <Label layoutX="15" layoutY="15" style="-fx-text-fill: white; -fx-font-size: 24; -fx-font-weight: bold;" text="Employee Dashboard" />
+        <Label fx:id="welcomeLabel" layoutX="250" layoutY="20" style="-fx-text-fill: white; -fx-font-size: 16;" />
+        <Button layoutX="700" layoutY="15" onAction="#handleLogout" prefWidth="80" style="-fx-background-color: #e74c3c; -fx-text-fill: white;" text="Logout" />
+    </Pane>
+
+
+    <Pane fx:id="contentPane" layoutX="200" layoutY="60" prefHeight="480" prefWidth="600">
+
+        <Text layoutX="150" layoutY="200" style="-fx-font-size: 28; -fx-fill: #2c3e50;" />
+   
+      
+          <Pane layoutX="135.0" layoutY="14.0" prefHeight="423.0" prefWidth="200">
+           <Button layoutX="0" layoutY="15" onAction="#showDashboard" prefWidth="200" style="-fx-background-color: #3498db; -fx-text-fill: white;" text="Dashboard" />
+           <Button layoutY="84.0" onAction="#showNewBooking" prefWidth="200" style="-fx-background-color: #2c3e50; -fx-text-fill: white;" text="New Booking" />
+           <Button layoutY="145.0" onAction="#showManageBookings" prefWidth="200" style="-fx-background-color: #2c3e50; -fx-text-fill: white;" text="Manage Bookings" />
+           <Button layoutY="212.0" onAction="#showProcessPayments" prefWidth="200" style="-fx-background-color: #2c3e50; -fx-text-fill: white;" text="Process Payments" />
+       </Pane>
+    </Pane>
+
+</AnchorPane>

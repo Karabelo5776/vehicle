@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managementsystem.CustomerDashboardController">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #2c3e50; -fx-padding: 15;">
+            <Label style="-fx-text-fill: white; -fx-font-size: 24; -fx-font-weight: bold;" text="Customer Dashboard" />
+            <Label fx:id="welcomeLabel" style="-fx-text-fill: white; -fx-font-size: 16;" />
+            <Button onAction="#handleLogout" style="-fx-background-color: #e74c3c; -fx-text-fill: white;" text="Logout" HBox.hgrow="ALWAYS" />
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane>
+
+            <Tab text="Book a Vehicle">
+                <VBox spacing="10" style="-fx-padding: 20;">
+                    <Label style="-fx-font-size: 20; -fx-font-weight: bold;" text="Available Vehicles" />
+
+                    <TableView fx:id="vehicleTable">
+                        <columns>
+                            <TableColumn fx:id="idColumn" prefWidth="50" text="ID" />
+                            <TableColumn fx:id="brandColumn" prefWidth="100" text="Brand" />
+                            <TableColumn fx:id="modelColumn" prefWidth="100" text="Model" />
+                            <TableColumn fx:id="categoryColumn" prefWidth="100" text="Category" />
+                            <TableColumn fx:id="priceColumn" prefWidth="80" text="Price/Day" />
+                            <TableColumn fx:id="statusColumn" prefWidth="80" text="Status" />
+                        </columns>
+                    </TableView>
+
+                    <HBox spacing="10">
+
+                        <Button onAction="#handleAddNewCustomer" style="-fx-background-color: #2980b9; -fx-text-fill: white;" text="Register Your Full Customer Details" />
+                        <Button onAction="#handleBookVehicle" style="-fx-background-color: #27ae60; -fx-text-fill: white;" text="Book Vehicle" />
+                        <Button onAction="#handleRefresh" text="Refresh" />
+                    </HBox>
+                </VBox>
+            </Tab>
+
+
+            <Tab text="My Bookings">
+                <VBox spacing="10" style="-fx-padding: 20;">
+                    <Label style="-fx-font-size: 20; -fx-font-weight: bold;" text="Your Current Bookings" />
+
+                    <TableView fx:id="bookingTable">
+                        <columns>
+                            <TableColumn fx:id="bookingIdColumn" prefWidth="80" text="Booking ID" />
+                            <TableColumn fx:id="bookingVehicleColumn" prefWidth="150" text="Vehicle" />
+                            <TableColumn fx:id="bookingStartColumn" prefWidth="100" text="Start Date" />
+                            <TableColumn fx:id="bookingEndColumn" prefWidth="100" text="End Date" />
+                            <TableColumn fx:id="bookingAmountColumn" prefWidth="80" text="Amount" />
+                            <TableColumn fx:id="bookingStatusColumn" prefWidth="80" text="Status" />
+                        </columns>
+                    </TableView>
+
+                    <HBox spacing="10">
+                        <Button onAction="#handleViewBooking" text="View Details" />
+                        <Button onAction="#handleCancelBooking" style="-fx-background-color: #e74c3c; -fx-text-fill: white;" text="Cancel Booking" />
+                        <Button onAction="#handleRefreshBookings" text="Refresh" />
+                    </HBox>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+</BorderPane>

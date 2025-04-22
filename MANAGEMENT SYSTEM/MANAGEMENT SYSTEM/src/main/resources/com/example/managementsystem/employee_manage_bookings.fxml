@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.managementsystem.EmployeeManageBookingsController"
+            style="-fx-padding: 20;" prefWidth="800" prefHeight="600">
+
+
+    <Label text="Manage Bookings" layoutX="20" layoutY="20"
+           style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+    <Label fx:id="priceLabel" text="0.00" layoutX="100" layoutY="160"/>
+
+
+    <Button text="Back" layoutX="400" layoutY="20" onAction="#handleBack"
+            style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+
+    <Pane layoutX="20" layoutY="60" prefWidth="760" prefHeight="40">
+        <Button text="Mark as Returned" layoutX="0" layoutY="0"
+                style="-fx-background-color: #2ecc71; -fx-text-fill: white;"
+                onAction="#handleMarkReturned"/>
+        <Button text="Cancel Booking" layoutX="120" layoutY="0"
+                style="-fx-background-color: #e74c3c; -fx-text-fill: white;"
+                onAction="#handleCancelBooking"/>
+        <Button text="Modify Booking" layoutX="240" layoutY="0"
+                style="-fx-background-color: #3498db; -fx-text-fill: white;"
+                onAction="#handleModifyBooking"/>
+        <TextField fx:id="searchField" layoutX="360" layoutY="0"
+                   promptText="Search bookings..." prefWidth="200"/>
+        <Button text="Search" layoutX="570" layoutY="0"
+                onAction="#handleSearch" prefWidth="80"/>
+    </Pane>
+
+
+    <TableView fx:id="bookingTable" layoutX="20" layoutY="110" prefWidth="760" prefHeight="450">
+        <columns>
+            <TableColumn text="ID" fx:id="idColumn" prefWidth="50"/>
+            <TableColumn text="Customer" fx:id="customerColumn" prefWidth="150"/>
+            <TableColumn text="Vehicle" fx:id="vehicleColumn" prefWidth="150"/>
+            <TableColumn text="Start Date" fx:id="startDateColumn" prefWidth="100"/>
+            <TableColumn text="End Date" fx:id="endDateColumn" prefWidth="100"/>
+            <TableColumn text="Amount" fx:id="amountColumn" prefWidth="80"/>
+            <TableColumn text="Status" fx:id="statusColumn" prefWidth="80"/>
+        </columns>
+    </TableView>
+</AnchorPane>

@@ -1,0 +1,20 @@
+.button {
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 8 15;
+}
+
+.button:hover {
+    -fx-opacity: 0.9;
+}
+
+.text-field, .combo-box {
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.table-view {
+    -fx-box-border: transparent;
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.managementsystem.EmployeeNewBookingController"
+            style="-fx-padding: 20;" prefWidth="500" prefHeight="400">
+
+
+    <Label text="New Booking" layoutX="20" layoutY="20"
+           style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+
+
+    <Pane layoutX="20" layoutY="60" prefWidth="460" prefHeight="250">
+
+        <Label text="Customer:" layoutX="0" layoutY="0"/>
+        <ComboBox fx:id="customerCombo" layoutX="100" layoutY="0" prefWidth="200"/>
+        <Button text="New Customer" layoutX="310" layoutY="0" onAction="#handleNewCustomer"/>
+
+
+        <Label text="Vehicle:" layoutX="0" layoutY="40"/>
+        <ComboBox fx:id="vehicleCombo" layoutX="100" layoutY="40" prefWidth="200"/>
+
+
+        <Label text="Start Date:" layoutX="0" layoutY="80"/>
+        <DatePicker fx:id="startDatePicker" layoutX="100" layoutY="80" prefWidth="200"/>
+
+
+        <Label text="End Date:" layoutX="0" layoutY="120"/>
+        <DatePicker fx:id="endDatePicker" layoutX="100" layoutY="120" prefWidth="200"/>
+
+
+        <Label text="Estimated Price:" layoutX="0" layoutY="160"/>
+        <Label fx:id="priceLabel" text="0.00" layoutX="100" layoutY="160"/>
+    </Pane>
+
+
+    <Pane layoutX="20" layoutY="320" prefWidth="460" prefHeight="40">
+        <Button text="Cancel" layoutX="300" layoutY="0" onAction="#handleCancel"/>
+        <Button text="Create Booking" layoutX="380" layoutY="0"
+                style="-fx-background-color: #2ecc71; -fx-text-fill: white;"
+                onAction="#handleCreateBooking"/>
+    </Pane>
+</AnchorPane>

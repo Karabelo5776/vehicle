@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+
+<AnchorPane fx:controller="com.example.managementsystem.AdminReportsController"
+            xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            prefWidth="800" prefHeight="600"
+            style="-fx-padding: 20;">
+
+
+    <Label text="Reports Dashboard" layoutX="20" layoutY="20"
+           style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+
+
+    <Pane layoutX="20" layoutY="60" prefHeight="40">
+        <Button text="Revenue Report" layoutX="0" layoutY="0"
+                style="-fx-background-color: #3498db; -fx-text-fill: white;"
+                onAction="#showRevenueReport"/>
+        <Button text="Vehicle Utilization" layoutX="140" layoutY="0"
+                style="-fx-background-color: #3498db; -fx-text-fill: white;"
+                onAction="#showUtilizationReport"/>
+        <Button text="Customer Activity" layoutX="300" layoutY="0"
+                style="-fx-background-color: #3498db; -fx-text-fill: white;"
+                onAction="#showActivityReport"/>
+        <Button text="Export to PDF" layoutX="460" layoutY="0"
+                style="-fx-background-color: #2ecc71; -fx-text-fill: white;"
+                onAction="#handleExportPDF"/>
+    </Pane>
+
+
+    <Pane fx:id="chartPane" layoutX="20" layoutY="120" prefWidth="760" prefHeight="460"
+          style="-fx-padding: 10;">
+        <BarChart fx:id="revenueChart" layoutX="0" layoutY="0" prefWidth="760" prefHeight="460"
+                  title="Monthly Revenue" animated="false" visible="false">
+            <xAxis>
+                <CategoryAxis label="Month" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Amount ($)" />
+            </yAxis>
+        </BarChart>
+
+        <PieChart fx:id="utilizationChart" layoutX="0" layoutY="0" prefWidth="760" prefHeight="460"
+                  title="Vehicle Utilization" visible="false"/>
+
+        <LineChart fx:id="activityChart" layoutX="0" layoutY="0" prefWidth="760" prefHeight="460"
+                   title="Customer Activity" visible="false">
+            <xAxis>
+                <CategoryAxis label="Month" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Rentals" />
+            </yAxis>
+        </LineChart>
+    </Pane>
+
+</AnchorPane>

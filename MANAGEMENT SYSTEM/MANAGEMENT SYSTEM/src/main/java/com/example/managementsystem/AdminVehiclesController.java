@@ -1,0 +1,306 @@
+package com.example.managementsystem;
+
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.sql.*;
+
+public class AdminVehiclesController {
+
+
+    @FXML private TextField brandField;
+    @FXML private TextField modelField;
+    @FXML private ComboBox<String> categoryCombo;
+    @FXML private TextField yearField;
+    @FXML private TextField priceField;
+    @FXML private ComboBox<String> statusCombo;
+
+
+    @FXML private TableView<Vehicle> vehicleTable;
+    @FXML private TableColumn<Vehicle, Integer> idColumn;
+    @FXML private TableColumn<Vehicle, String> brandColumn;
+    @FXML private TableColumn<Vehicle, String> modelColumn;
+    @FXML private TableColumn<Vehicle, String> categoryColumn;
+    @FXML private TableColumn<Vehicle, Integer> yearColumn;
+    @FXML private TableColumn<Vehicle, Double> priceColumn;
+    @FXML private TableColumn<Vehicle, String> statusColumn;
+    @FXML private TextField searchField;
+
+    private ObservableList<Vehicle> vehicleData = FXCollections.observableArrayList();
+    private Vehicle selectedVehicle = null;
+
+    @FXML
+    public void initialize() {
+
+        categoryCombo.getItems().addAll("Car", "Bike", "Van", "Truck", "SUV");
+        statusCombo.getItems().addAll("Available", "Rented", "Maintenance", "Reserved");
+        statusCombo.setValue("Available");
+
+
+        idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
+        brandColumn.setCellValueFactory(cellData -> cellData.getValue().brandProperty());
+        modelColumn.setCellValueFactory(cellData -> cellData.getValue().modelProperty());
+        categoryColumn.setCellValueFactory(cellData -> cellData.getValue().categoryProperty());
+        yearColumn.setCellValueFactory(cellData -> cellData.getValue().yearProperty().asObject());
+        priceColumn.setCellValueFactory(cellData -> cellData.getValue().pricePerDayProperty().asObject());
+        statusColumn.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
+
+
+        loadVehicleData();
+
+
+        vehicleTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> handleTableSelection(newValue));
+    }
+
+    private void loadVehicleData() {
+        vehicleData.clear();
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String sql = "SELECT * FROM vehicles";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                vehicleData.add(new Vehicle(
+                        rs.getInt("vehicle_id"),
+                        rs.getString("brand"),
+                        rs.getString("model"),
+                        rs.getString("category"),
+                        rs.getInt("year"),
+                        rs.getDouble("price_per_day"),
+                        rs.getString("status")
+                ));
+            }
+            vehicleTable.setItems(vehicleData);
+        } catch (SQLException e) {
+            showAlert("Database Error", "Could not load vehicle data", e.getMessage());
+        }
+    }
+
+    private void handleTableSelection(Vehicle vehicle) {
+        if (vehicle != null) {
+            selectedVehicle = vehicle;
+            brandField.setText(vehicle.getBrand());
+            modelField.setText(vehicle.getModel());
+            categoryCombo.setValue(vehicle.getCategory());
+            yearField.setText(String.valueOf(vehicle.getYear()));
+            priceField.setText(String.valueOf(vehicle.getPricePerDay()));
+            statusCombo.setValue(vehicle.getStatus());
+        }
+    }
+
+    @FXML
+    private void handleAddVehicle() {
+        if (isInputValid()) {
+            Vehicle newVehicle = new Vehicle(
+                    0,
+                    brandField.getText(),
+                    modelField.getText(),
+                    categoryCombo.getValue(),
+                    Integer.parseInt(yearField.getText()),
+                    Double.parseDouble(priceField.getText()),
+                    statusCombo.getValue()
+            );
+
+            saveVehicleToDatabase(newVehicle);
+            vehicleData.add(newVehicle);
+            clearForm();
+        }
+    }
+
+    @FXML
+    private void handleUpdateVehicle() {
+        if (selectedVehicle == null) {
+            showAlert("Error", "No vehicle selected", "Please select a vehicle to update.");
+            return;
+        }
+
+        if (isInputValid()) {
+            selectedVehicle.setBrand(brandField.getText());
+            selectedVehicle.setModel(modelField.getText());
+            selectedVehicle.setCategory(categoryCombo.getValue());
+            selectedVehicle.setYear(Integer.parseInt(yearField.getText()));
+            selectedVehicle.setPricePerDay(Double.parseDouble(priceField.getText()));
+            selectedVehicle.setStatus(statusCombo.getValue());
+
+            updateVehicleInDatabase(selectedVehicle);
+            vehicleTable.refresh();
+            clearForm();
+        }
+    }
+
+    @FXML
+    private void handleDeleteVehicle() {
+        Vehicle selected = vehicleTable.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            try (Connection conn = DatabaseConnection.getConnection()) {
+                String sql = "DELETE FROM vehicles WHERE vehicle_id = ?";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setInt(1, selected.getId());
+
+                int rowsAffected = stmt.executeUpdate();
+                if (rowsAffected > 0) {
+                    vehicleData.remove(selected);
+                    showAlert("Success", null, "Vehicle deleted successfully.");
+                    clearForm();
+                }
+            } catch (SQLException e) {
+                showAlert("Database Error", "Could not delete vehicle", e.getMessage());
+            }
+        } else {
+            showAlert("Error", "No vehicle selected", "Please select a vehicle to delete.");
+        }
+    }
+
+    @FXML
+    private void handleClearForm() {
+        clearForm();
+    }
+
+    private void clearForm() {
+        selectedVehicle = null;
+        brandField.clear();
+        modelField.clear();
+        categoryCombo.setValue(null);
+        yearField.clear();
+        priceField.clear();
+        statusCombo.setValue("Available");
+        vehicleTable.getSelectionModel().clearSelection();
+    }
+
+    @FXML
+    private void handleSearch() {
+        String searchTerm = searchField.getText().toLowerCase();
+        if (searchTerm.isEmpty()) {
+            vehicleTable.setItems(vehicleData);
+            return;
+        }
+
+        ObservableList<Vehicle> filteredData = FXCollections.observableArrayList();
+        for (Vehicle vehicle : vehicleData) {
+            if (vehicle.getBrand().toLowerCase().contains(searchTerm) ||
+                    vehicle.getModel().toLowerCase().contains(searchTerm) ||
+                    vehicle.getCategory().toLowerCase().contains(searchTerm)) {
+                filteredData.add(vehicle);
+            }
+        }
+        vehicleTable.setItems(filteredData);
+    }
+
+    private void saveVehicleToDatabase(Vehicle vehicle) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String sql = "INSERT INTO vehicles (brand, model, category, year, price_per_day, status) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, vehicle.getBrand());
+            stmt.setString(2, vehicle.getModel());
+            stmt.setString(3, vehicle.getCategory());
+            stmt.setInt(4, vehicle.getYear());
+            stmt.setDouble(5, vehicle.getPricePerDay());
+            stmt.setString(6, vehicle.getStatus());
+
+            int affectedRows = stmt.executeUpdate();
+            if (affectedRows > 0) {
+                try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        vehicle.setId(generatedKeys.getInt(1));
+                    }
+                }
+                showAlert("Success", null, "Vehicle added successfully.");
+            }
+        } catch (SQLException e) {
+            showAlert("Database Error", "Could not save vehicle", e.getMessage());
+        }
+    }
+
+    private void updateVehicleInDatabase(Vehicle vehicle) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String sql = "UPDATE vehicles SET brand = ?, model = ?, category = ?, year = ?, price_per_day = ?, status = ? WHERE vehicle_id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, vehicle.getBrand());
+            stmt.setString(2, vehicle.getModel());
+            stmt.setString(3, vehicle.getCategory());
+            stmt.setInt(4, vehicle.getYear());
+            stmt.setDouble(5, vehicle.getPricePerDay());
+            stmt.setString(6, vehicle.getStatus());
+            stmt.setInt(7, vehicle.getId());
+
+            stmt.executeUpdate();
+            showAlert("Success", null, "Vehicle updated successfully.");
+        } catch (SQLException e) {
+            showAlert("Database Error", "Could not update vehicle", e.getMessage());
+        }
+    }
+
+    private boolean isInputValid() {
+        StringBuilder errorMessage = new StringBuilder();
+
+        if (brandField.getText() == null || brandField.getText().isEmpty()) {
+            errorMessage.append("Brand is required!\n");
+        }
+        if (modelField.getText() == null || modelField.getText().isEmpty()) {
+            errorMessage.append("Model is required!\n");
+        }
+        if (categoryCombo.getValue() == null) {
+            errorMessage.append("Category is required!\n");
+        }
+
+        try {
+            Integer.parseInt(yearField.getText());
+        } catch (NumberFormatException e) {
+            errorMessage.append("Year must be a valid number!\n");
+        }
+
+        try {
+            Double.parseDouble(priceField.getText());
+        } catch (NumberFormatException e) {
+            errorMessage.append("Price must be a valid number!\n");
+        }
+
+        if (statusCombo.getValue() == null) {
+            errorMessage.append("Status is required!\n");
+        }
+
+        if (errorMessage.length() > 0) {
+            showAlert("Invalid Fields", "Please correct invalid fields", errorMessage.toString());
+            return false;
+        }
+        return true;
+    }
+
+    @FXML
+    private void handleBackButton() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/managementsystem/admin_dashboard.fxml"));
+            Stage stage = (Stage) brandField.getScene().getWindow();
+            if (stage == null) {
+                throw new IllegalStateException("Stage is null");
+            }
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Navigation Error");
+            alert.setContentText("Could not load the dashboard view.");
+            alert.showAndWait();
+        }
+    }
+
+
+    private void showAlert(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+}

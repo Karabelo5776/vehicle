@@ -1,0 +1,104 @@
+package com.example.managementsystem;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
+import java.sql.*;
+
+public class CustomerDialogController {
+    @FXML private TextField nameField;
+    @FXML private TextField emailField;
+    @FXML private TextField phoneField;
+    @FXML private TextField licenseField;
+
+    private Stage dialogStage;
+    private Customer customer;
+    private boolean saveClicked = false;
+
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+
+        if (customer != null) {
+            // Editing existing customer
+            nameField.setText(customer.getName());
+            emailField.setText(customer.getEmail());
+            phoneField.setText(customer.getPhone());
+            licenseField.setText(customer.getLicense());
+        }
+    }
+
+    public boolean isSaveClicked() {
+        return saveClicked;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    @FXML
+    private void handleSave() {
+        if (isInputValid()) {
+            if (customer == null) {
+                customer = new Customer(
+                        0,
+                        nameField.getText(),
+                        emailField.getText(),
+                        phoneField.getText(),
+                        licenseField.getText(),
+                        0
+                );
+            } else {
+                customer.setName(nameField.getText());
+                customer.setEmail(emailField.getText());
+                customer.setPhone(phoneField.getText());
+                customer.setLicense(licenseField.getText());
+            }
+
+            saveClicked = true;
+            dialogStage.close();
+        }
+    }
+
+    @FXML
+    private void handleCancel() {
+        dialogStage.close();
+    }
+
+    private boolean isInputValid() {
+        String errorMessage = "";
+
+        if (nameField.getText() == null || nameField.getText().isEmpty()) {
+            errorMessage += "Full name is required!\n";
+        }
+        if (emailField.getText() == null || emailField.getText().isEmpty()) {
+            errorMessage += "Email is required!\n";
+        } else if (!emailField.getText().matches(".+@.+\\..+")) {
+            errorMessage += "Invalid email format!\n";
+        }
+        if (phoneField.getText() == null || phoneField.getText().isEmpty()) {
+            errorMessage += "Phone number is required!\n";
+        }
+        if (licenseField.getText() == null || licenseField.getText().isEmpty()) {
+            errorMessage += "License number is required!\n";
+        }
+
+        if (errorMessage.isEmpty()) {
+            return true;
+        } else {
+            showAlert("Invalid Fields", "Please correct invalid fields", errorMessage);
+            return false;
+        }
+    }
+
+    private void showAlert(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+}

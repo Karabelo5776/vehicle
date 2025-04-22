@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="700" prefWidth="1100" style="-fx-background-color: #f5f5f5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managementsystem.AdminVehiclesController">
+
+
+    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #8e44ad; -fx-padding: 15;">
+        <Button onAction="#handleBackButton" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-border-color: white; -fx-border-radius: 5;" text="← Dashboard" />
+        <Label style="-fx-text-fill: white; -fx-font-size: 24; -fx-font-weight: bold;" text="Vehicle Management" />
+    </HBox>
+
+
+    <GridPane hgap="20" layoutX="20" layoutY="80" vgap="20">
+        <columnConstraints>
+            <ColumnConstraints prefWidth="350" />
+            <ColumnConstraints prefWidth="350" />
+            <ColumnConstraints prefWidth="350" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints prefHeight="400" />
+            <RowConstraints prefHeight="200" />
+        </rowConstraints>
+
+
+        <VBox style="-fx-background-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 20;" GridPane.columnIndex="0">
+            <Label style="-fx-font-size: 18; -fx-font-weight: bold; -fx-padding: 0 0 10 0;" text="Vehicle Details" />
+
+            <GridPane hgap="10" vgap="15">
+                <columnConstraints>
+                    <ColumnConstraints prefWidth="100" />
+                    <ColumnConstraints prefWidth="200" />
+                </columnConstraints>
+
+
+                <Label text="Brand:" />
+                <TextField fx:id="brandField" GridPane.columnIndex="1" />
+
+                <Label text="Model:" GridPane.rowIndex="1" />
+                <TextField fx:id="modelField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <Label text="Category:" GridPane.rowIndex="2" />
+                <ComboBox fx:id="categoryCombo" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                <Label text="Year:" GridPane.rowIndex="3" />
+                <TextField fx:id="yearField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                <Label text="Price/Day:" GridPane.rowIndex="4" />
+                <TextField fx:id="priceField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                <Label text="Status:" GridPane.rowIndex="5" />
+                <ComboBox fx:id="statusCombo" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+
+                <HBox alignment="CENTER_RIGHT" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                    <Button onAction="#handleClearForm" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #95a5a6; -fx-text-fill: white;" text="Clear" />
+                    <Button onAction="#handleUpdateVehicle" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #3498db; -fx-text-fill: white;" text="Update" />
+                    <Button onAction="#handleAddVehicle" prefHeight="25.0" prefWidth="101.0" style="-fx-background-color: #2ecc71; -fx-text-fill: white;" text="Add" />
+                </HBox>
+            <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+            </rowConstraints>
+            </GridPane>
+        </VBox>
+
+
+        <VBox spacing="10" style="-fx-background-color: white; -fx-border-radius: 10; -fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.columnSpan="2">
+            <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 15;">
+                <TextField fx:id="searchField" prefWidth="300" promptText="Search vehicles..." />
+                <Button onAction="#handleSearch" style="-fx-background-color: #8e44ad; -fx-text-fill: white;" text="Search" />
+                <Button onAction="#handleDeleteVehicle" style="-fx-background-color: #e74c3c; -fx-text-fill: white;" text="Delete Selected" />
+            </HBox>
+
+            <TableView fx:id="vehicleTable" style="-fx-padding: 0 10 10 10;">
+                <columns>
+                    <TableColumn fx:id="idColumn" prefWidth="50" text="ID" />
+                    <TableColumn fx:id="brandColumn" prefWidth="100" text="Brand" />
+                    <TableColumn fx:id="modelColumn" prefWidth="120" text="Model" />
+                    <TableColumn fx:id="categoryColumn" prefWidth="100" text="Category" />
+                    <TableColumn fx:id="yearColumn" prefWidth="84.0" text="Year" />
+                    <TableColumn fx:id="priceColumn" prefWidth="111.0" text="Price/Day" />
+                    <TableColumn fx:id="statusColumn" prefWidth="145.0" text="Status" />
+                </columns>
+            </TableView>
+        </VBox>
+    </GridPane>
+
+
+    <stylesheets>
+        <URL value="@/styles.css" />
+    </stylesheets>
+</AnchorPane>

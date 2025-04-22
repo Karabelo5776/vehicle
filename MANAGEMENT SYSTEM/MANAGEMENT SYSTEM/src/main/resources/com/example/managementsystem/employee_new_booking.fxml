@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="965.0" style="-fx-padding: 20;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managementsystem.EmployeeNewBookingController">
+
+    <!-- Back Button -->
+    <Button layoutX="400" layoutY="20" onAction="#handleBack" style="-fx-background-color: #3498db; -fx-text-fill: white;" text="Back" />
+
+    <!-- Page Title -->
+    <Label layoutX="20" layoutY="20" style="-fx-font-size: 20; -fx-font-weight: bold;" text="New Booking" />
+
+    <!-- Customer Details Section -->
+    <Pane layoutX="421.0" layoutY="70.0" prefHeight="200" prefWidth="460">
+        <Button layoutX="310" layoutY="0" onAction="#handleCustomer" text="New Customer" />
+
+        <!-- Customer Details Fields -->
+        <Label layoutX="0" layoutY="40" text="Full Name:" />
+        <TextField fx:id="nameField" layoutX="100" layoutY="40" prefWidth="300" />
+
+        <Label layoutX="0" layoutY="80" text="Email:" />
+        <TextField fx:id="emailField" layoutX="100" layoutY="80" prefWidth="300" />
+
+        <Label layoutX="0" layoutY="120" text="Phone:" />
+        <TextField fx:id="phoneField" layoutX="100" layoutY="120" prefWidth="300" />
+
+        <Label layoutX="0" layoutY="160" text="License:" />
+        <TextField fx:id="licenseField" layoutX="100" layoutY="160" prefWidth="300" />
+    </Pane>
+
+    <!-- Booking Details Section -->
+    <Pane layoutX="14.0" layoutY="110.0" prefHeight="208.0" prefWidth="377.0">
+        <!-- Vehicle Selection -->
+        <Label layoutX="0" layoutY="0" text="Vehicle:" />
+        <ComboBox fx:id="vehicleCombo" layoutX="100" layoutY="0" prefWidth="200" />
+
+        <!-- Start Date -->
+        <Label layoutX="0" layoutY="40" text="Start Date:" />
+        <DatePicker fx:id="startDatePicker" layoutX="100" layoutY="40" prefWidth="200" />
+
+        <!-- End Date -->
+        <Label layoutX="0" layoutY="80" text="End Date:" />
+        <DatePicker fx:id="endDatePicker" layoutX="100" layoutY="80" prefWidth="200" />
+
+        <!-- Estimated Price -->
+        <Label layoutX="0" layoutY="120" text="Estimated Price:" />
+        <Label fx:id="priceLabel" layoutX="100" layoutY="120" style="-fx-font-size: 14; -fx-font-weight: bold;" text="0.00" />
+    </Pane>
+
+    <!-- Action Buttons -->
+    <Pane layoutX="20" layoutY="430" prefHeight="40" prefWidth="460" />
+     <!-- Customer Selection -->
+     <Label layoutX="14.0" layoutY="58.0" text="Customer:" />
+     <ComboBox fx:id="customerCombo" layoutX="114.0" layoutY="58.0" prefWidth="200" />
+     <Button layoutX="122.0" layoutY="322.0" onAction="#handleCancel" text="Cancel" />
+     <Button layoutX="214.0" layoutY="322.0" onAction="#handleCreateBooking" style="-fx-background-color: #2ecc71; -fx-text-fill: white;" text="Create Booking" />
+</AnchorPane>
